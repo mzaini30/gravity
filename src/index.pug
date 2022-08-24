@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    .teks
+    script
+      :coffee
+        tulis = (x) ->
+          document.querySelector(".teks").innerText = x
+
+        derajat = (x) ->
+          "#{x * 9}°"
+
+        gravity = new GravitySensor({
+          frequency: 60
+        })
+        gravity.addEventListener "reading", ->
+          tulis("""
+            x: #{derajat gravity.x}
+            y: #{derajat gravity.y}
+            z: #{derajat gravity.z}
+          """)
+        gravity.start()
